@@ -1,38 +1,124 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  font-family: "Arial";
+  color:var(--inputFieldsBorder);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  /* COLORS */
+  --dark: #071739;
+  --between: #0b2255;
+  --inputFieldsBorder: #4b5a79;
+  --medium: #5e6472;
+  --light: #dcdfe6;
+  --warning: #5c1f1f;
+  --warningLight: #922d2d;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+html,
+body {
+  background-color: var(--dark);
+  min-height: 100%;
+  max-height: fit-content;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+/* ANIMATION CLASSES */
+@keyframes appearFromTop {
   from {
-    transform: rotate(0deg);
+    transform: translateY(-50%);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0%);
+    opacity: 1;
   }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.button {
+  margin: 5vh 0;
+
+  width: 70vw;
+  min-width: 300px;
+
+  height: 10vh;
+  min-height: 70px;
+
+  border: 0.5rem solid var(--medium);
+  font-size: 2rem;
+  display: flex;
+  text-align: center;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--medium);
+  transition: transform 200ms, background-color 200ms, color 200ms;
+  animation: 1s ease-out appearFromTop 1;
+}
+.button:hover {
+  transform: scale(1.05);
+  color: var(--light);
+  background-color: var(--between);
+}
+.button:focus {
+  outline: none;
+}
+a {
+  text-decoration: none;
+}
+
+.inputField {
+  margin: 5vh 0;
+
+  width: 70vw;
+  min-width: 300px;
+
+  height: 10vh;
+  min-height: 70px;
+
+  text-align: center;
+  background-color: transparent;
+  border: 0.5rem dashed var(--inputFieldsBorder);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--light);
+  transition: transform 200ms, background-color 200ms, color 200ms;
+  animation: 1s ease-out appearFromTop 1;
+  outline: none;
+}
+.inputField:focus {
+  transform: scale(1.05);
+  color: var(--light);
+  background-color: var(--between);
+}
+.inputField:hover {
+  transform: scale(1.05);
+}
+.inputField::placeholder {
+  color: var(--inputFieldsBorder);
+}
+.errorDialogBox {
+  border: 0.5rem dashed var(--warningLight);
+  background-color: var(--dark);
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 2rem;
+  color: var(--warningLight);
+  text-decoration: dashed;
+  animation: 2s ease-in-out pulse infinite alternate-reverse;
 }
