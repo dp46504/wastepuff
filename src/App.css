@@ -1,18 +1,9 @@
 * {
   box-sizing: border-box;
   font-family: "Arial";
-  color:var(--inputFieldsBorder);
+  color: var(--inputFieldsBorder);
 }
-:root {
-  /* COLORS */
-  --dark: #071739;
-  --between: #0b2255;
-  --inputFieldsBorder: #4b5a79;
-  --medium: #5e6472;
-  --light: #dcdfe6;
-  --warning: #5c1f1f;
-  --warningLight: #922d2d;
-}
+@import "Summer.css";
 html,
 body {
   background-color: var(--dark);
@@ -121,4 +112,15 @@ a {
   color: var(--warningLight);
   text-decoration: dashed;
   animation: 2s ease-in-out pulse infinite alternate-reverse;
+}
+
+#signInAnchor {
+  text-align: center;
+  font-size: 1.5rem;
+  text-decoration: underline;
+  transition: transform 200ms;
+  animation: 1s ease-out appearFromTop 1;
+}
+#signInAnchor:hover {
+  transform: scale(1.2);
 }

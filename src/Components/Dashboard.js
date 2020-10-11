@@ -4,22 +4,26 @@ import Button from "./Button";
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userData: this.props.userData,
+    };
+    this.logoutFunction = this.logoutFunction.bind(this);
   }
-  // Variables
-  activePack = this.props.activePack;
+
+  logoutFunction = this.props.logoutFunction;
 
   render() {
     return (
       <div>
-        {this.activePack !== "" ? (
-          <Button>+1 from active {`(` + this.activePack + `)`}</Button>
+        {this.state.userData.lastPack ? (
+          <Button>+1 from active {`(${this.state.userData.lastPack})`}</Button>
         ) : (
           <div></div>
         )}
 
         <Button>Choose active pack</Button>
         <Button>Add new pack</Button>
+        <div onClick={this.logoutFunction}><Button>Log Out</Button></div>
       </div>
     );
   }
