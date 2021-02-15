@@ -1,29 +1,18 @@
 import React from "react";
-import Button from "./Button";
-
+import { StyledButton } from "../styles/Styles";
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userData: this.props.userData,
-    };
-    this.logoutFunction = this.logoutFunction.bind(this);
+    this.state = {};
   }
-
-  logoutFunction = this.props.logoutFunction;
 
   render() {
     return (
       <div>
-        {this.state.userData.lastPack ? (
-          <Button>+1 from active {`(${this.state.userData.lastPack})`}</Button>
-        ) : (
-          <div></div>
-        )}
-
-        <Button>Choose active pack</Button>
-        <Button>Add new pack</Button>
-        <div onClick={this.logoutFunction}><Button>Log Out</Button></div>
+        <StyledButton>+1 from active </StyledButton>
+        <StyledButton>Choose active pack</StyledButton>
+        <StyledButton>Add new pack</StyledButton>
+        <StyledButton>Log Out</StyledButton>
       </div>
     );
   }
