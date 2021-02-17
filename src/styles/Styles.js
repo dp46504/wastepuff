@@ -60,7 +60,6 @@ a {
 
 export const StyledButton = styled.button`
   margin: 5vh 0;
-
   width: 70vw;
   min-width: 300px;
 
