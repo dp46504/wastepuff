@@ -3,20 +3,28 @@ import {
   StyledButton,
   StyledInput,
 } from "../styles/Styles";
-import { Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import React from "react";
+import { db_link } from "../Links";
 
-export default class LogInForm extends React.Component {
+class LogInForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.logInFunction = this.logInFunction.bind(this);
   }
 
+  componentDidMount() {
+    if (localStorage.getItem("jwt")) {
+      this.props.history.push("../dashboard");
+    }
+  }
+
   async logInFunction() {
     const email = document.getElementById("emailField").value;
     const password = document.getElementById("passwordField").value;
-    const url = "http://192.168.50.240:5000/login/";
+    const url = db_link + "/login/";
     const rawResponse = await fetch(url, {
       method: "POST",
       headers: {
@@ -30,7 +38,7 @@ export default class LogInForm extends React.Component {
     const token = rawResponse.headers.get("auth-token");
     if (token != null) {
       localStorage.setItem("jwt", token);
-      window.location.href = "../";
+      this.props.history.push("../dashboard");
     } else {
       rawResponse.text().then((result) => {
         alert(result);
@@ -61,3 +69,5 @@ export default class LogInForm extends React.Component {
     );
   }
 }
+
+export default withRouter(LogInForm);

@@ -9,7 +9,7 @@ export const colors = {
     inputFieldsBorder: "#4F6826",
     medium: "#488C03",
     light: "#D1CD8B",
-    warning: "#5c1f1f",
+    warning: "#8c3137",
     warningLight: "#922d2d",
   },
   // Autumn
@@ -19,7 +19,7 @@ export const colors = {
     inputFieldsBorder: "#BF8F70",
     medium: "#DAB797",
     light: "#F1DFC2",
-    warning: "#5c1f1f",
+    warning: "#cc212e",
     warningLight: "#922d2d",
   },
   // Winter
@@ -29,12 +29,12 @@ export const colors = {
     inputFieldsBorder: "#4b5a79",
     medium: "#5e6472",
     light: "#dcdfe6",
-    warning: "#5c1f1f",
-    warningLight: "#922d2d",
+    warning: "#693438",
+    warningLight: "#a32139",
   },
 };
 
-const theme = colors.summer;
+const theme = colors.winter;
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -56,18 +56,41 @@ body {
 a {
   text-decoration: none;
 }
+
 `;
+
+const size = {
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "425px",
+  tablet: "768px",
+  laptop: "1024px",
+  laptopL: "1440px",
+  desktop: "2560px",
+};
+
+const device = {
+  mobileS: `(min-width: ${size.mobileS})`,
+  mobileM: `(min-width: ${size.mobileM})`,
+  mobileL: `(min-width: ${size.mobileL})`,
+  tablet: `(min-width: ${size.tablet})`,
+  laptop: `(min-width: ${size.laptop})`,
+  laptopL: `(min-width: ${size.laptopL})`,
+  desktop: `(min-width: ${size.desktop})`,
+  desktopL: `(min-width: ${size.desktop})`,
+};
 
 export const StyledButton = styled.button`
   margin: 5vh 0;
   width: 70vw;
   min-width: 300px;
+  max-width: 50vw;
 
   height: 10vh;
   min-height: 70px;
   background-color: transparent;
   border: 0.5rem solid ${theme.medium};
-  font-size: 2rem;
+  font-size: 1.6rem;
   display: flex;
   text-align: center;
   padding: 50px;
@@ -78,7 +101,16 @@ export const StyledButton = styled.button`
   transition: transform 200ms, background-color 200ms, color 200ms;
   animation: 1s ease-out ${appearFromTop} 1;
 
-  &:hover {
+  @media ${device.mobileL} {
+    font-size: 2rem;
+    &:hover {
+      transform: scale(1.05);
+      color: ${theme.light};
+      background-color: ${theme.between};
+    }
+  }
+
+  &:active {
     transform: scale(1.05);
     color: ${theme.light};
     background-color: ${theme.between};
@@ -94,6 +126,7 @@ export const StyledInput = styled.input`
 
   width: 70vw;
   min-width: 300px;
+  max-width: 50vw;
 
   height: 10vh;
   min-height: 70px;
@@ -133,4 +166,27 @@ export const StyledSignInAnchor = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+export const StyledWastedDisplay = styled.div`
+  margin: 5vh auto;
+  width: 30vw;
+  min-width: 300px;
+
+  height: 10vh;
+  min-height: 70px;
+  background-color: transparent;
+
+  border: 0.5rem solid ${theme.warning};
+
+  font-size: 2.8rem;
+  display: flex;
+  text-align: center;
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: ${theme.warning};
+  transition: transform 200ms, background-color 200ms, color 200ms;
+  animation: 1s ease-out ${appearFromTop} 1;
 `;

@@ -1,69 +1,42 @@
 import React from "react";
+import { withRouter } from "react-router";
 import SigninForm from "./Components/SigninForm";
 import LogInForm from "./Components/LogInForm";
 import Dashboard from "./Components/Dashboard";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import AddPack from "./Components/AddPack";
+import { Switch, Route } from "react-router-dom";
 import { GlobalStyle } from "./styles/Styles";
 
-function App() {
-  return <Application></Application>;
-}
-
-class Application extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({
       token: localStorage.getItem("jwt"),
-    });
+    };
   }
 
   render() {
     return (
       <div>
         <GlobalStyle />
-        <Router>
-          <Switch>
-            {/* GŁÓWNA STRONA */}
-            <Route
-              path="/"
-              exact
-              render={() =>
-                this.state.token ? (
-                  <Redirect to="/dashboard" />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() =>
+              this.state.token
+                ? this.props.history.push("../dashboard")
+                : this.props.history.push("../login")
+            }
+          />
 
-            {/* EKRAN Z WYBOREM LOGOWANIA LUB REJESTRACJI */}
-            {/* WYRENDEROWANIE FORMULARZA REJESTRACJI */}
-            <Route path="/signin">
-              <SigninForm></SigninForm>
-            </Route>
-
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-
-            <Route path="/login">
-              <LogInForm />
-            </Route>
-          </Switch>
-        </Router>
+          <Route path="/signin" component={SigninForm} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login" component={LogInForm} />
+          <Route path="/addPack" component={AddPack} />
+        </Switch>
       </div>
     );
   }
 }
-export default App;
+export default withRouter(App);
